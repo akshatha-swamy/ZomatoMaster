@@ -1,0 +1,12 @@
+.hide-scrollbar {
+    overflow: hidden;
+  }
+  
+  /* Show the scrollbar for WebKit browsers (Chrome, Safari, etc.) */
+  .hide-scrollbar::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }

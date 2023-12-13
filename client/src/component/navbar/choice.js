@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import "Extra.css";
+
 
 const ChoiceLg=()=>{
    
@@ -84,7 +84,7 @@ const ChoiceLg=()=>{
       setSelected(index);
     };
     return <>
-         <div className="mx-5 px-5 w-full flex gap-5 overflow-x-auto hide-scrollbar">
+         <div className="mx-3 px-2 w-full flex gap-5 overflow-x-auto ">
           {choices.map((choice, index) => (
             <div
               key={index}
@@ -93,15 +93,15 @@ const ChoiceLg=()=>{
               }`}
               onClick={() => handleItemClick(index)}
             >
-              <div className="w-12 h-12 rounded-full"
+              <div className="w-16 h-16 rounded-full items-center"
                style={{ backgroundColor:selected==index? "": "#f2f2f2"}}
                >
-                <img className="p-3" src={selected== index ? choice.image2 : choice.image} alt={`${choice.title} Img`}
+                <img className="p-3 w-full" src={selected== index ? choice.image2 : choice.image} alt={`${choice.title} Img`}
                 />
               </div>
-              <div className="text-xl  p-3 font-medium"
+              <div className="text-base p-3 "
               style={{color:selected==index?"#f05b6a":"#595959"}}>
-                <h1>{choice.title}</h1>
+                <h2>{choice.title}</h2>
               </div>
             </div>
           ))}
@@ -109,7 +109,7 @@ const ChoiceLg=()=>{
     </>;
   };
   
-  const Choice1 = () => {
+  const Choice = () => {
     return (
       <>
         <nav>
@@ -139,7 +139,7 @@ const choices = [
       
     },
     {
-      title: "Dining Out",
+      title: "DiningOut",
       image:
         "https://b.zmtcdn.com/data/o2_assets/78d25215ff4c1299578ed36eefd5f39d1616149985.png?output-format=webp",
         image2:"https://b.zmtcdn.com/data/o2_assets/30fa0a844f3ba82073e5f78c65c18b371616149662.png"//color
@@ -153,4 +153,4 @@ const choices = [
   ];
   
 
-export default Choice1;
+export default Choice;

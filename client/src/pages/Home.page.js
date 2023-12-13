@@ -1,10 +1,10 @@
 import React from "react";
-import HomeHOC from "../HOC/Home.HOC";
+import Choice from "../component/navbar/choice";
 
 const HomePage=()=>{
     return(
         <>
-    
+            <Choice/>
         </>
     )
 };
