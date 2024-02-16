@@ -53,7 +53,7 @@ Router.post("/signin", async (req, res) => {
         // Generate JWT auth token
         const token = user.generateJwtToken();
 
-        return res.status(200).json({ token,status:"Success"});
+        return res.status(200).json({ token,status:"Success","data":user});
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -79,11 +79,15 @@ Access              Public
 Method              GET
 */
 
-Router.get("/google/callback",passport.authenticate("google",{failureRedirect:"/"}), 
-(req,res)=>{
-    return res.json({token:req.session.passport.user.token});
-}
+Router.get("/google/callback",passport.authenticate("google",{
+    successRedirect:"http://localhost:3000/bengaluru",
+    failureRedirect:"/login/failed",
+})
+
 );
+
+
+
 
 
 

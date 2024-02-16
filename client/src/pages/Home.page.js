@@ -51,8 +51,8 @@ const HomePage=()=>{
             <HomePageButton city="Alappuzha"/>
             <HomePageButton city="Amritsar"/>
 
-            <Link to="/bangaluru">
-            <HomePageButton city="Bangaluru"/>
+            <Link to="/bengaluru">
+            <HomePageButton city="Bengaluru"/>
             </Link>
             
             <HomePageButton city="Bhopal"/>

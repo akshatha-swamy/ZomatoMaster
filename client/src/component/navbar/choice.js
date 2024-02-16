@@ -19,9 +19,9 @@ const ChoiceLg=()=>{
       <>
         <div className="mx-9 px-5 w-full flex gap-7">
           {choices.map((choice, index) => (
-            <Link to={`/bangaluru/${choice.id}`}>
+            <Link key={choice.id} to={`/bengaluru/${choice.id}`}>
             <div
-              key={index}
+              
               className="flex items-center m-3 cursor-pointer p-3 hover:border-b-2 border-pink-300"
               onClick={() => handleItemClick(index)}
             >
@@ -58,9 +58,9 @@ const ChoiceLg=()=>{
     <>
          <div className="mx-3 px-5 w-full flex gap-7">
           {choices.map((choice, index) => (
-            <Link to={`/bangaluru/${choice.id}`}>
+            <Link key={choice.id} to={`/bengaluru/${choice.id}`}>
             <div
-              key={index}
+              
               className="flex items-center m-3 cursor-pointer p-3 hover:border-b-2 border-pink-300"
               
               onClick={() => handleItemClick(index)}
@@ -104,9 +104,9 @@ const ChoiceLg=()=>{
     <>
          <div className="bg:white shadow-md px-5 py-3 fixed bottom-0 z-10 w-full  flex justify-between">
           {choices.map((choice, index) => (
-            <Link to={`/bangaluru/${choice.id}`}>
+            <Link key={choice.id} to={`/bengaluru/${choice.id}`}>
             <div
-              key={index}
+              
               className="flex flex-col items-center  cursor-pointer p-3" 
               onClick={() => handleItemClick(index)}
             >

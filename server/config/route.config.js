@@ -17,10 +17,10 @@ export default (passport)=>{
     passport.use(
         new JWTStrategy(options,async(jwt__payload,done)=>{
             try{
-                const doesuserExist=UserModel.findById(jwt__payload.user);
+                const doesuserExist=await UserModel.findById(jwt__payload.user);
                 if(!doesuserExist)
                     return done(null,false);
-                return document(null,doesuserExist);
+                return done(null,doesuserExist);
             }
 
             catch(error){

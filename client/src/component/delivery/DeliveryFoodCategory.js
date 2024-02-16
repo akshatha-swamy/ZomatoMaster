@@ -1,6 +1,5 @@
 import React from "react";
-import NavBar from "../navbar";
-import Choice from "../navbar/choice";
+
 
 const DeliveryFoodCategory=(props)=>{
     return(

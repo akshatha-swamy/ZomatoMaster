@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs"
 import jwt  from "jsonwebtoken";
 
 const UserSchema=new mongoose.Schema({
-    fullname:{type:String,required:true},
+    fullname:{type:String},
     email:{type:String,required:true},
     password:{type:String},
     address:[{detail:{type:String},for:{type:String}}],
@@ -15,7 +15,7 @@ const UserSchema=new mongoose.Schema({
 );
 
 UserSchema.methods.generateJwtToken=function(){
-    return jwt.sign({user:this.id.toString()},"ZomatoApp");
+    return jwt.sign({user:this},"ZomatoApp");
 }
 
 UserSchema.statics.findEmailAndPhone = async function ({ email, phoneNumber }) {

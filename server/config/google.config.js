@@ -29,6 +29,7 @@ export default (passport)=>{
                 const token=user.generateJwtToken();
                 //return user
                 done(null,{user,token});
+                
             }
             else{ 
                 //create a new users
@@ -36,8 +37,10 @@ export default (passport)=>{
                  //generating a jwt token
                  const token=user.generateJwtToken();
                 //return user
-                done(null,{user,token})
+                done(null,{user,token});
+                
             }
+            console.log("user data:",newUser);
         }
         catch(error){
             done(error,null);

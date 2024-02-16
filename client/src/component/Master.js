@@ -14,8 +14,6 @@ const Master=()=>{
     {type==="diningOut" && <DiningOut/>}
     {type==="nightLife"&& <NightLife/>}
     </div>
-
-    
     </>;
 };
 

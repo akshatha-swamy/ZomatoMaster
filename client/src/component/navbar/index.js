@@ -1,13 +1,54 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 
 import { CiSearch } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidDownArrow,BiChevronDown } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import axios from "axios";
+import  {jwtDecode} from "jwt-decode"
+import { Link } from "react-router-dom";
+
+
+
 
 
 const NavLg=()=>{
+
+    const handleLogout=()=>{
+        localStorage.removeItem("token");
+        window.location="/"
+    }
+
+    const[userdata,setUserdata]=useState({});
+
+    const getUser=async()=>{
+        try{
+           // const response=await axios.get("http://localhost:4000/auth/login/success",{withCredentials:true});
+            //console.log("response",response)
+            const token=localStorage.getItem("token")
+            const decode=jwtDecode(token);
+            setUserdata(decode);
+            
+        }
+
+        catch{
+
+        }
+    }
+    console.log("decode token",userdata?.user?.fullname)
+    const name=userdata?.user?.fullname
+
+    useEffect(()=>{
+        getUser()
+    },[])
+
+    const [showNav, setShowNav] = useState(false); // State to manage visibility of the side navbar
+
+    const toggleNav = () => {
+        setShowNav(!showNav); // Toggle the state when the hamburger menu is clicked
+    };
+    
     return(
         <>
         <div className="mx-9 px-5 w-full">
@@ -41,9 +82,39 @@ const NavLg=()=>{
 
 
             <div className="flex items-center gap-2">
-            <FaUserCircle className="w-8 h-8" style={{color:"#a3b9db"}}/>
-            <h1 className="text-md">Akshatha</h1>
-            <BiChevronDown/>
+
+            {name ? ( // If user is logged in
+                        <div>
+                            <button className="flex items-center" onClick={toggleNav}>
+                                <FaUserCircle className="w-8 h-8" style={{color:"#a3b9db"}}/>  
+                                <h1 className="text-xl p-2 text-center text-navbar-300">{name}</h1>
+                                <BiChevronDown/>
+                                
+                            </button>
+                            {showNav && (
+                <div className="absolute w-36 h-auto top-18  right-5 z-10  bg-white rounded-lg shadow-lg ">
+                
+                    {/* Your side navbar content goes here */}
+                    <ul className="flex flex-col ">
+                        <button className="h-auto w-full py-2 ps-2 text-md text-navbar-300 hover:bg-navbar-200 ">Profile</button>
+                        <button className="h-auto w-full py-2 text-md   text-navbar-300 hover:bg-navbar-200">Notifications</button>
+                        <button className="h-auto w-full py-2 text-md  text-navbar-300 hover:bg-navbar-200">BookMarks</button>
+                        <button className="h-auto w-full py-2 text-md   text-navbar-300 hover:bg-navbar-200">Reviews</button>
+                        <button className="h-auto w-full py-2 text-md   text-navbar-300 hover:bg-navbar-200">Settings</button>
+                        <button className="h-auto w-full py-2 text-md   text-navbar-300 hover:bg-navbar-200 " onClick={handleLogout}>Logout</button>
+                        
+                    </ul>
+                </div>
+                    
+                
+            )}
+
+                        </div>
+                            
+                        ) : ( // If user is not logged in
+                            <Link to="/signin"><button className="h-12 w-full py-2 text-lg bg-pink-300 rounded-lg px-3 text-center text-white">LOGIN</button></Link>
+             )}
+            
             </div>
             </div>
             </div>
@@ -89,7 +160,7 @@ const NavMd=()=>{
 
             <div className="flex items-center gap-1">
             <FaUserCircle className="w-4 h-4" style={{color:"#a3b9db"}}/>
-            <h1 className="text-sm">Akshatha</h1>
+            <button>LOG OUT</button>
             <BiChevronDown/>
             </div>
             </div>
@@ -103,12 +174,70 @@ const NavMd=()=>{
 };
 
 const NavSm=()=>{
+    const handleLogout=()=>{
+        localStorage.removeItem("token");
+        window.location="/"
+    }
+
+    const[userdata,setUserdata]=useState({});
+
+    const getUser=async()=>{
+        try{
+           // const response=await axios.get("http://localhost:4000/auth/login/success",{withCredentials:true});
+            //console.log("response",response)
+            const token=localStorage.getItem("token")
+            const decode=jwtDecode(token);
+            setUserdata(decode);
+            
+        }
+
+        catch{
+
+        }
+    }
+    console.log("decode token",userdata?.user?.fullname)
+    const name=userdata?.user?.fullname
+
+    useEffect(()=>{
+        getUser()
+    },[])
+
+    const [showNav, setShowNav] = useState(false); // State to manage visibility of the side navbar
+
+    const toggleNav = () => {
+        setShowNav(!showNav); // Toggle the state when the hamburger menu is clicked
+    };
     return(
         <>
-        <div className="w-full flex justify-between items-center px-5 py-2 ">
+        <div className=" relative w-full flex justify-between items-center px-5 py-2 ">
             <div>
-                <GiHamburgerMenu  className="w-8 h-8"/>
-            </div>
+                <GiHamburgerMenu  className="w-8 h-8" onClick={toggleNav}/>
+            </div> {showNav && (
+                <div className="absolute w-2/5 h-full top-20 left-0 z-10 w-64 h-full bg-white text-navbar-300">
+                    {/* Your side navbar content goes here */}
+                    <ul>
+                        <li>
+                        <div className="flex gap-2 items-center">
+                        <FaUserCircle className="w-8 h-8 py-2" style={{color:"#a3b9db"}}/>
+                        <h1 className="h-8 w-full py-2 text-lg text-navbar-300" >
+                                {
+                                    name && name
+                                }
+                            </h1>
+                        </div>
+                            
+                        </li>
+                        <li className="h-8 w-full py-2 text-lg  px-auto text-navbar-300">Profile</li>
+                        <li className="h-8 w-full py-2 text-lg  px-auto  text-navbar-300">Notifications</li>
+                        <li className="h-8 w-full py-2 text-lg  px-auto  text-navbar-300">BookMarks</li>
+                        <li className="h-8 w-full py-2 text-lg  px-auto  text-navbar-300">Reviews</li>
+                        <li className="h-8 w-full py-2 text-lg  px-auto  text-navbar-300">Settings</li>
+                        <button className="h-8 w-full py-2 text-lg  px-auto  text-navbar-300" onClick={handleLogout}>Logout</button>
+                        
+                    </ul>
+                </div>
+            )}
+
 
             <div className="w-32">
             <img src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png" alt="logo" className="py-6 w-full" />
